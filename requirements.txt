@@ -1,1 +1,2 @@
-streamlit
+streamlit==1.10.0
+watchdog==2.1.9

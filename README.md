@@ -3,5 +3,7 @@
 Presenting it on streamlit.
 
 ## Streamlit - 
-Streamlit is a an data visualization driven language based on python to present data from ML/ data analytics easily.
+Streamlit is a framework used to convert python scripts into interactive apps, it enables data scientists to quickly create data and model-based apps for the entire company.
+
+
 
