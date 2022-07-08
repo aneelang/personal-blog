@@ -25,45 +25,85 @@ ax.hist(arr, bins=20)
 
 fig
 
-import streamlit as st
-import streamlit.components.v1 as components
+# import streamlit as st
+# import streamlit.components.v1 as components
 
-# bootstrap 4 collapse example
-components.html(
-    """
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <div id="accordion">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Collapsible Group Item #1
-            </button>
-          </h5>
-        </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body">
-            Collapsible Group Item #1 content
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header" id="headingTwo">
-          <h5 class="mb-0">
-            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Collapsible Group Item #2
-            </button>
-          </h5>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-          <div class="card-body">
-            Collapsible Group Item #2 content
-          </div>
-        </div>
-      </div>
-    </div>
-    """,
-    height=600,
-)
+# name = st.text_input('Name')
+
+# if not name:
+#     st.warning('Please input a name.')
+#     st.stop()
+
+# st.success('Thank you for inputting a name.')
+
+with st.form("my_form", clear_on_submit=True):
+    st.write("Inside the form")
+    first_name = st.text_input('First Name')
+    last_name = st.text_input('Last Name')
+    
+    slider_val = st.slider("Form Slider")
+    checkbox_val = st.checkbox("Form checkbox")
+
+    # Every form must have a submit button.
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        st.write("slider", slider_val, "checkbox", checkbox_val)
+st.write("Outside the form")
+
+# df_1 = pd.DataFrame(np.random.randn(1000, 2) / [50, 50]+[37.76, -122,4], columns =['lat', 'lon'])
+
+# st.map(df_1)
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+from io import StringIO
+
+df = pd.DataFrame(
+     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+     columns=['lat', 'lon'])
+
+st.map(df)
+
+uploaded_file = st.file_uploader("Choose a file")
+# if uploaded_file is not None:
+
+#     bytes_data = uploaded_file.getvalue()
+#     st.write(bytes_data)
+
+#     # stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+#     # st.write(stringio)
+
+#     # string_data = stringio.read()
+#     # st.write(string_data)
+
+#     dataframe = pd.read_csv(uploaded_file)
+#     st.write(dataframe)
+
+
+# from PIL import Image
+# img_file_buffer = st.camera_input("Take a picture")
+
+# if img_file_buffer is not None:
+#     # Reading image file buffer as PIL Image
+#     img = Image.open(img_file_buffer)
+
+#     # Converting PIL image to numpy array
+#     img_array = np.array(img)
+
+#     st.write(img_array.shape)
+
+# st.download_button(
+#     label = "Download the image",
+#     data=img_file_buffer,
+#     file_name = "download_file.jpeg",
+#     mime='jpeg'
+# )
+
+camera_on = st.checkbox("Click, to switch on Camera")
+while camera_on:
+    picture = st.camera_input("Take a picture")
+
+    if picture:
+        st.image(picture)
+
